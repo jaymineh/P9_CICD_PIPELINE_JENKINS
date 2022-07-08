@@ -90,6 +90,7 @@ sudo apt-get install jenkins
 
 ![Successful Build](buildlist.png)
 
-- 
+- To confirm if the files in `/mnt/apps` were successfully updated, log into the NFS server and run `cat /mnt/apps/README.md` or `ls /mnt/apps/README.md`.
+![Confirm if files updated](mntapps.png)
 
-
+**Project 9 Deployed Successfully!**
