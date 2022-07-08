@@ -44,9 +44,11 @@ sudo apt-get install jenkins
 - Click configure on the job/project and add the following configs:
 
     - GitScm Polling
+
     ![GitScm](buildtrigger.png)
 
     - Configure Post build actions to "archive the artifacts" and set it to ** for all files.
+
     ![Archive files](filestoarchive.png)
 
 - Make a change to the README file in your GitHub repo and a new build should run on Jenkins. The artifacts are stored on Jenkins locally in this folder `/var/lib/jenkins/jobs/<nameofrepo>/builds/<build_number>/archive/`
@@ -90,7 +92,8 @@ sudo apt-get install jenkins
 
 ![Successful Build](buildlist.png)
 
-- To confirm if the files in `/mnt/apps` were successfully updated, log into the NFS server and run `cat /mnt/apps/README.md` or `ls /mnt/apps/README.md`.
+- To confirm if the files in `/mnt/apps` were successfully updated, log into the NFS server and run `cat /mnt/apps/README.md` or `ls /mnt/apps/README.md`
+
 ![Confirm if files updated](mntapps.png)
 
 **Project 9 Deployed Successfully!**
