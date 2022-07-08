@@ -30,4 +30,28 @@ sudo apt-get install jenkins
 **Step 2 - Configure Jenkins To Retrieve Source Codes From GitHub Using Webhooks**
 ---
 
+- Go to the tooling repo on GitHub (or repo in question), then go to settingsand click on webhook. The payload IP is `<http://Jenkins-Server-Public-Server-IP:8080/github-webhook/>`. The content type should be set to `application/json`.
+
+- Go to the Jenkins home page ad click on new projects. Give the projet a name and select freestyle project.
+
+- Copy the URL of the repo as that will be used to link Jenkins to the repo and work with it. After copying th URL, in the config setup of the Jenkins project, head over to source code management and  choose Git.
+![Source code management](codemgt.png)
+
+- Select credentials and input your GitHub credentials so Jenkins can have access to read activitie from the cloud repo.
+
+- Save configuration and click on build now, which should build successfully with a green tick. This is a test to see if the connection is set up correctly.
+
+- Click configure on the job/project and add the following configs:
+
+    - GitScm Polling
+    ![GitScm](buildtrigger.png)
+
+    - Configure Post build actions to "archive the artifacts" and set it to ** for all files.
+    ![Archive files](filestoarchive.png)
+
+- Make a change to the README file in your GitHub repo and a new build should run on Jenkins. The artifacts are stored on Jenkins locally in this folder `/var/lib/jenkins/jobs/<nameofrepo>/builds/<build_number>/archive/`
+
+**Step 3 – Configure Jenkins To Copy Files To NFS Server Via SSH**
+---
+
 - 
