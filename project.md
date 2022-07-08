@@ -54,4 +54,42 @@ sudo apt-get install jenkins
 **Step 3 – Configure Jenkins To Copy Files To NFS Server Via SSH**
 ---
 
+- Now that we have our artifacts saved locally on our Jenkins server, the next step is to copy them to our NFS server to the `/mnt/apps`folder. For this we need to install the `Publish over SSH` plugin.
+
+- On main dashboard select "Manage Jenkins" and choose "Configure System" and scroll to the Publish over SSH plugin to configure it. Provide the following:
+
+    - Passphrase (if set up)
+
+    - Key (vi into the .pem file and grab the contents to paste)
+
+    - Name (any you prefer)
+
+    - Hostname (private IP of NFS server)
+
+    - Username (ec2-user since the instance is RHEL based)
+
+    - Remote directory (/mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server)
+
+    ![SSH Plugin setup](sshpublish.png)
+
+    ![SSH Plugin Server setup](sshpublishserver.png)
+
+    - Click on "Test" to test the connection b/w Jenkins and the NFS server. Remember that SSH port 22 must be enabled on the NFS server.
+
+- Open the Jenkins project configuration page and add another `Post build action` called `send build artifacts over SSH`. See config below for setup:
+
+![SSH setup1](filestoarchive.png)
+
+![SSH setup2](sendoverssh.png)
+
+- After setting up the above, change something in the README.md of the GitHub repo and a new build will be triggered in Jenkins.
+
+    - I kept running into a permissions error on Jenkins saying it is unable to move into the designated folder. This resulted into some unstable builds. Had to modify the permissions & ownership in `/mnt/apps` to 777 and nobody before it ran successfully.
+
+    ![Permission & Ownership modification](chownchmod.png)
+
+![Successful Build](buildlist.png)
+
 - 
+
+
