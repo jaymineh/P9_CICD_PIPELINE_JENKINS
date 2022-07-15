@@ -30,7 +30,7 @@ sudo apt-get install jenkins
 **Step 2 - Configure Jenkins To Retrieve Source Codes From GitHub Using Webhooks**
 ---
 
-- Go to the tooling repo on GitHub (or repo in question), then go to settingsand click on webhook. The payload IP is `<http://Jenkins-Server-Public-Server-IP:8080/github-webhook/>`. The content type should be set to `application/json`.
+- Go to the tooling repo on GitHub (or repo in question), then go to settings and click on webhook. The payload IP is `<http://Jenkins-Server-Public-Server-IP:8080/github-webhook/>`. The content type should be set to `application/json`.
 
 - Go to the Jenkins home page ad click on new projects. Give the projet a name and select freestyle project.
 
