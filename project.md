@@ -78,7 +78,7 @@ sudo apt-get install jenkins
 
     - Click on "Test" to test the connection b/w Jenkins and the NFS server. Remember that SSH port 22 must be enabled on the NFS server.
     
-    - I recently started running into an error with Jenkins where I was unable to Publish over SSH. Apparently, it is a known issue with the RHEL server I used (RHEL 9). There are 2 known workarounds which are: `Using an older RHEL (probably 8 or something) or generating an id_ecdsa certificate (which I used). See screenshots below:
+    _I recently started running into an error with Jenkins where I was unable to Publish over SSH. Apparently, it is a known issue with the RHEL server I used (RHEL 9). There are 2 known workarounds which are: `Using an older RHEL (probably 8 or something) or generating an id_ecdsa certificate (which I used). See screenshots below:_
     
     ![Jenkins SSH Error](jenkins-error.png)
     
