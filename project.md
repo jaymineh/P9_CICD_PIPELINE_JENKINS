@@ -20,10 +20,10 @@ sudo apt-get install jenkins
 - Log into Jenkins by putting in http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080 to initiate the setup.
 
 - Upon reaching Jenkins, you would be asked to put in the administrator password. This can be found by running `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`. Copy and paste it in the box.
-![Jenkins Startpage](unlock_jenkins.png)
+![Jenkins Startpage](images/unlock_jenkins.png)
 
 - Next, install suggested plugins to install the basic plugins necessary for Jenkins.
-![Jenkins Plugins](jenkins_plugins.png)
+![Jenkins Plugins](images/jenkins_plugins.png)
 
 - Once plugins installation is done, create an admin user and you will get your Jenkins server address.
 
@@ -35,7 +35,7 @@ sudo apt-get install jenkins
 - Go to the Jenkins home page ad click on new projects. Give the projet a name and select freestyle project.
 
 - Copy the URL of the repo as that will be used to link Jenkins to the repo and work with it. After copying th URL, in the config setup of the Jenkins project, head over to source code management and  choose Git.
-![Source code management](codemgt.png)
+![Source code management](images/codemgt.png)
 
 - Select credentials and input your GitHub credentials so Jenkins can have access to read activitie from the cloud repo.
 
@@ -45,11 +45,11 @@ sudo apt-get install jenkins
 
     - GitScm Polling
 
-    ![GitScm](buildtrigger.png)
+    ![GitScm](images/buildtrigger.png)
 
     - Configure Post build actions to "archive the artifacts" and set it to ** for all files.
 
-    ![Archive files](filestoarchive.png)
+    ![Archive files](images/filestoarchive.png)
 
 - Make a change to the README file in your GitHub repo and a new build should run on Jenkins. The artifacts are stored on Jenkins locally in this folder `/var/lib/jenkins/jobs/<nameofrepo>/builds/<build_number>/archive/`
 
@@ -72,34 +72,34 @@ sudo apt-get install jenkins
 
     - Remote directory (/mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server)
 
-    ![SSH Plugin setup](sshpublish.png)
+    ![SSH Plugin setup](images/sshpublish.png)
 
-    ![SSH Plugin Server setup](sshpublishserver.png)
+    ![SSH Plugin Server setup](images/sshpublishserver.png)
 
     - Click on "Test" to test the connection b/w Jenkins and the NFS server. Remember that SSH port 22 must be enabled on the NFS server.
     
     _I recently started running into an error with Jenkins where I was unable to Publish over SSH. Apparently, it is a known issue with the RHEL server I used (RHEL 9). There are 2 known workarounds which are: `Using an older RHEL (probably 8 or something) or generating an id_ecdsa certificate (which I used). See screenshots below:_
     
-    ![Jenkins SSH Error](jenkins-error.png)
+    ![Jenkins SSH Error](images/jenkins-error.png)
     
-    ![Jenkins SSH Resolution](jenkins-solution.png)
+    ![Jenkins SSH Resolution](images/jenkins-solution.png)
 
 - Open the Jenkins project configuration page and add another `Post build action` called `send build artifacts over SSH`. See config below for setup:
 
-![SSH setup1](filestoarchive.png)
+![SSH setup1](images/filestoarchive.png)
 
-![SSH setup2](sendoverssh.png)
+![SSH setup2](images/sendoverssh.png)
 
 - After setting up the above, change something in the README.md of the GitHub repo and a new build will be triggered in Jenkins.
 
     - I kept running into a permissions error on Jenkins saying it is unable to move into the designated folder. This resulted into some unstable builds. Had to modify the permissions & ownership in `/mnt/apps` to 777 and nobody before it ran successfully.
 
-    ![Permission & Ownership modification](chownchmod.png)
+    ![Permission & Ownership modification](images/chownchmod.png)
 
-![Successful Build](buildlist.png)
+![Successful Build](images/buildlist.png)
 
 - To confirm if the files in `/mnt/apps` were successfully updated, log into the NFS server and run `cat /mnt/apps/README.md` or `ls /mnt/apps/README.md`
 
-![Confirm if files updated](mntapps.png)
+![Confirm if files updated](images/mntapps.png)
 
 **Project 9 Deployed Successfully!**
